@@ -115,7 +115,7 @@ export default function Home() {
                 <span className="map-status"><span className="pulse" /> atualizando agora</span>
                 <div className="street-readout" aria-live="polite"><span className="street-readout-icon">⌖</span><div><strong>{streetName}</strong><small>localização selecionada no mapa</small></div></div>
               </div>
-              <div className="map-canvas" aria-label="Mapa real de ocorrências em Londrina"><RealMap reports={visibleReports} activeId={activeId} onSelect={setActiveId} onUserPinClick={openReportForm} onLocationChange={handleUserLocation} onStreetChange={handleStreetName} /></div>
+              <div className="map-canvas" aria-label="Mapa real de ocorrências em Londrina"><RealMap reports={visibleReports} activeId={activeId} onSelect={setActiveId} onUserPinClick={openReportForm} onLocationChange={handleUserLocation} onStreetChange={handleStreetName} initialFocusUser /></div>
               <div className="map-footer"><span><b className="legend-dot high" /> alta prioridade</span><span><b className="legend-dot mid" /> em acompanhamento</span><span><b className="legend-dot done" /> resolvido</span><span className="map-count">{visibleReports.length} pontos visíveis</span></div>
             </div>
 

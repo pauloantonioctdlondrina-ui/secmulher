@@ -99,7 +99,7 @@ function MobileMapScreen({ reports, selected, street, onBack, onSelect, onLocati
   return <div className="mobile-map-view">
     <header className="mobile-map-header"><button className="mobile-back-button" onClick={onBack} aria-label="Voltar">‹</button><div><p>MAPA COLABORATIVO</p><h1>Caminhos <i>Seguros</i></h1></div><button className="mobile-help-button" aria-label="Como funciona">?</button></header>
     <div className="mobile-map-street"><span>⌖</span><div><small>VOCÊ ESTÁ NESTA REGIÃO</small><strong>{street}</strong></div></div>
-    <div className="mobile-map-wrap"><RealMap reports={reports} activeId={selected?.id ?? -1} onSelect={onSelect} onUserPinClick={onUserPinClick} onLocationChange={onLocationChange} onStreetChange={onStreetChange} /></div>
+    <div className="mobile-map-wrap"><RealMap reports={reports} activeId={selected?.id ?? -1} onSelect={onSelect} onUserPinClick={onUserPinClick} onLocationChange={onLocationChange} onStreetChange={onStreetChange} initialFocusUser /></div>
     <div className="mobile-map-tip"><span>✦</span><p><strong>Toque no pin “Você”</strong> para sinalizar um ponto vulnerável.</p></div>
     {selected && <MobileDetail report={selected} onClose={() => onSelect(-1)} />}
     {!selected && <div className="mobile-map-legend"><span><i className="legend-blue" /> ponto de ônibus</span><span><i className="legend-amber" /> iluminação</span><span><i className="legend-red" /> terreno/viela</span></div>}

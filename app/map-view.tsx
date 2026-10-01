@@ -3,7 +3,7 @@
 import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from "react-leaflet";
 import { divIcon } from "leaflet";
 import type { LatLngBoundsExpression } from "leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Report } from "./page";
 import "leaflet/dist/leaflet.css";
 
@@ -31,11 +31,17 @@ function markerIcon(report: Report, active: boolean) {
   });
 }
 
-function Recenter({ activeReport }: { activeReport?: Report }) {
+function Recenter({ activeReport, initialFocusUser }: { activeReport?: Report; initialFocusUser: boolean }) {
   const map = useMap();
+  const initialFocusApplied = useRef(false);
   useEffect(() => {
+    if (initialFocusUser && !initialFocusApplied.current) {
+      initialFocusApplied.current = true;
+      map.setView(fallbackLocation, 15, { animate: false });
+      return;
+    }
     if (activeReport) map.setView([activeReport.lat, activeReport.lng], Math.max(map.getZoom(), 14), { animate: true });
-  }, [activeReport?.id, map]);
+  }, [activeReport?.id, initialFocusUser, map]);
   return null;
 }
 
@@ -82,7 +88,10 @@ function LocationTracker({ onLocationChange, onStreetChange, onUserPinClick }: {
           map.setView(point, 15, { animate: true });
           void updateStreet(point);
         },
-        () => void updateStreet(fallbackLocation),
+        () => {
+          map.setView(fallbackLocation, 15, { animate: false });
+          void updateStreet(fallbackLocation);
+        },
         { enableHighAccuracy: true, timeout: 7000 },
       );
     } else {
@@ -111,7 +120,7 @@ function LocationTracker({ onLocationChange, onStreetChange, onUserPinClick }: {
   return <Marker position={location} icon={userIcon} zIndexOffset={1000} draggable eventHandlers={{ click: onUserPinClick, dragend: handleDragEnd }} />;
 }
 
-export default function RealMap({ reports, activeId, onSelect, onUserPinClick, onLocationChange, onStreetChange }: { reports: Report[]; activeId: number; onSelect: (id: number) => void; onUserPinClick: () => void; onLocationChange: (location: [number, number]) => void; onStreetChange: (street: string) => void }) {
+export default function RealMap({ reports, activeId, onSelect, onUserPinClick, onLocationChange, onStreetChange, initialFocusUser = false }: { reports: Report[]; activeId: number; onSelect: (id: number) => void; onUserPinClick: () => void; onLocationChange: (location: [number, number]) => void; onStreetChange: (street: string) => void; initialFocusUser?: boolean }) {
   const activeReport = reports.find((report) => report.id === activeId);
 
   return (
@@ -120,7 +129,7 @@ export default function RealMap({ reports, activeId, onSelect, onUserPinClick, o
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Recenter activeReport={activeReport} />
+      <Recenter activeReport={activeReport} initialFocusUser={initialFocusUser} />
       <LocationTracker onLocationChange={onLocationChange} onStreetChange={onStreetChange} onUserPinClick={onUserPinClick} />
       {reports.map((report) => {
         const isActive = report.id === activeId;
