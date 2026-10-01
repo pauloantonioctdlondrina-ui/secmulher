@@ -1,6 +1,7 @@
 node_modules/
 .next/
 .next-stale*/
+.next-error*/
 out/
 *.tsbuildinfo
 .env*
