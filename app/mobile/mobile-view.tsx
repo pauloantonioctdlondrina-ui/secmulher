@@ -69,32 +69,30 @@ export default function MobilePrototype() {
 
 function MobileHome({ onOpenMap }: { onOpenMap: () => void }) {
   return <div className="mobile-home-view">
-    <header className="mobile-app-header">
-      <button className="mobile-menu-button" aria-label="Abrir menu"><span /><span /><span /></button>
-      <img src="/logo-londrina-on.svg" alt="Londrina ON" />
-      <button className="mobile-profile-button" aria-label="Abrir perfil">PA</button>
-    </header>
-    <div className="mobile-home-content">
-      <p className="mobile-greeting">Olá, Paulo</p>
-      <h1>Como podemos<br /><strong>ajudar hoje?</strong></h1>
-      <label className="mobile-search"><span>⌕</span><input placeholder="Busque um serviço" aria-label="Buscar serviço" /><b>⌘</b></label>
-      <p className="mobile-section-label">Serviços mais acessados</p>
-      <div className="mobile-service-grid">
-        <button><span className="service-icon red">♧</span><strong>Saúde</strong><small>Atendimento e cuidados</small></button>
-        <button><span className="service-icon blue">▣</span><strong>Iluminação</strong><small>Solicite manutenção</small></button>
-        <button><span className="service-icon blue">⌂</span><strong>Urbanismo</strong><small>Melhorias na cidade</small></button>
-        <button><span className="service-icon red">◌</span><strong>Ouvidoria</strong><small>Fale com a Prefeitura</small></button>
-      </div>
-      <p className="mobile-section-label mobile-section-spaced">Para você</p>
-      <button className="safe-banner" onClick={onOpenMap}>
-        <span className="safe-banner-art"><i /><b>✦</b><em>⌁</em></span>
-        <span className="safe-banner-copy"><small>PREVENÇÃO URBANA</small><strong>Caminhos<br /><i>Seguros</i></strong><span>Veja e sinalize pontos que precisam de atenção.</span></span>
-        <span className="safe-banner-arrow">→</span>
-      </button>
-      <div className="mobile-app-card"><span>▣</span><div><strong>Londrina ON</strong><small>Todos os serviços da Prefeitura em um só lugar.</small></div><b>›</b></div>
+    <div className="mock-status-bar"><strong>10:55</strong><span>▣　◌　⌁　▰</span></div>
+    <section className="mobile-dashboard-hero">
+      <header className="mobile-dashboard-header"><div className="mobile-avatar"><span /></div><div className="mobile-welcome"><small>Paulo Cesar Antonio</small><strong>Seja bem-vindo(a)!</strong><b>Paulo</b></div><div className="mobile-hero-actions"><button aria-label="Notificações">♧</button><button aria-label="Configurações">◉</button></div></header>
+      <h1>SOLICITAÇÕES</h1>
+      <div className="mobile-request-cards"><RequestCard tone="yellow" icon="▤" number="0" label="Em andamento" /><RequestCard tone="green" icon="☑" number="0" label="Respondidas" /><RequestCard tone="blue" icon="✓" number="4" label="Concluídas" /></div>
+    </section>
+    <div className="mobile-home-content mobile-dashboard-content">
+      <p className="mobile-dashboard-label">NOVIDADES</p>
+      <button className="mobile-news-card upa-card"><span className="news-icon">♧</span><span><strong>UPA Digital - Londrina ON</strong><small>Atendimento médico online, adulto e infantil,<br /> gratuito, realizado por videoconferência.</small></span><b>24 horas</b><i>›</i></button>
+      <button className="mobile-news-card safe-news-card" onClick={onOpenMap}><span className="safe-news-icon">✦</span><span><strong>Caminhos Seguros</strong><small>Veja e sinalize pontos da cidade que precisam<br /> de mais atenção e prevenção.</small></span><b>MAPA</b><i>›</i></button>
+      <p className="mobile-dashboard-label">NOSSA LONDRINA</p>
+      <button className="mobile-list-card"><span className="list-card-icon">▤</span><span><strong>Notícias</strong><small>Fique por dentro das últimas notícias da cidade!</small></span><i>›</i></button>
+      <p className="mobile-dashboard-label">ACESSOS ÚTEIS</p>
+      <button className="mobile-list-card"><span className="list-card-icon">ⓘ</span><span><strong>Carta de Serviços</strong><small>Consulte mais informações sobre serviços públicos</small></span><i>›</i></button>
+      <button className="mobile-list-card"><span className="list-card-icon">⌁</span><span><strong>Lei de Acesso à Informação</strong><small>Saiba como acessar informações públicas</small></span><i>›</i></button>
+      <p className="mobile-dashboard-label social-label">ACOMPANHE AS NOSSAS REDES</p>
+      <div className="mobile-social-row"><span>◎</span><span>f</span><span>▷</span></div>
     </div>
-    <nav className="mobile-bottom-nav"><button className="active"><span>⌂</span>Início</button><button><span>▦</span>Serviços</button><button><span>♧</span>Ajuda</button><button><span>◉</span>Perfil</button></nav>
+    <nav className="mobile-dashboard-nav"><button className="active"><span>⌂</span>Início</button><button className="nav-plus" aria-label="Adicionar"><b>＋</b></button><button><span>▣</span>Chat</button></nav>
   </div>;
+}
+
+function RequestCard({ tone, icon, number, label }: { tone: string; icon: string; number: string; label: string }) {
+  return <div className="mobile-request-card"><span className={`request-icon ${tone}`}>{icon}</span><strong>{number}</strong><small>{label}</small></div>;
 }
 
 function MobileMapScreen({ reports, selected, street, onBack, onSelect, onLocationChange, onStreetChange, onUserPinClick }: { reports: Report[]; selected?: Report; street: string; onBack: () => void; onSelect: (id: number) => void; onLocationChange: (location: [number, number]) => void; onStreetChange: (street: string) => void; onUserPinClick: () => void }) {
