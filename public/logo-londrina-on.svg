@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1680 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Londrina ON</title>
+  <desc id="desc">Logo Londrina ON — A Prefeitura na palma da sua mão.</desc>
+  <g fill="#ad3738">
+    <path d="M8 395 122 162 250 84 139 394Z"/>
+    <path d="M142 394 319 40 386 2 414 49 245 395Z"/>
+    <path d="M274 395 418 112 478 204 381 395Z"/>
+    <path d="M8 395c105 7 196 51 214 207H83c-5-89-33-159-75-207Z"/>
+    <path d="M139 395c116 12 206 60 215 207H226c-7-94-42-166-87-207Z"/>
+    <path d="M274 395c124 16 207 67 220 207H368c-9-95-48-173-94-207Z"/>
+  </g>
+  <circle cx="714" cy="318" r="256" fill="#22313c"/>
+  <circle cx="714" cy="318" r="139" fill="#fff"/>
+  <path d="M1043 62h157l207 263V62h157v515h-157l-207-262v262h-157Z" fill="#22313c"/>
+  <text x="6" y="900" fill="#22313c" font-family="Arial, Helvetica, sans-serif" font-size="198" letter-spacing="-11">LONDRINA ON</text>
+  <text x="62" y="1018" fill="#22313c" font-family="Georgia, serif" font-size="50" letter-spacing="5">A PREFEITURA NA PALMA DA SUA MÃO.</text>
+</svg>
